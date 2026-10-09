@@ -1,0 +1,12 @@
+{
+  "name": "pweb-ts-p01-2026",
+  "version": "1.0.0",
+  "description": "Antrian Rumah Sakit - Praktikum Pemrograman Web Modul 3 (TypeScript native)",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

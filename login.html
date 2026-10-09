@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masuk · Antrian Rumah Sakit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="login-wrap">
+    <section class="login-card">
+      <h1>Masuk</h1>
+      <p class="muted">Halaman ini untuk mengakses Dashboard Admin dan Panel Operator. Layar Antrian dan Ambil Nomor tidak memerlukan login.</p>
+      <form id="loginForm" novalidate>
+        <label class="field">Username<input id="username" type="text" autocomplete="username" value="emilys"></label>
+        <label class="field">Password<input id="password" type="password" autocomplete="current-password" value="emilyspass"></label>
+        <label class="checkline"><input id="showPass" type="checkbox"> Tampilkan password</label>
+        <p id="loginError" class="form-error" role="alert" hidden></p>
+        <button id="submitBtn" class="btn btn-primary" type="submit">Masuk</button>
+      </form>
+      <p class="muted small" style="margin-top:18px">Gunakan akun uji dari <a href="https://dummyjson.com/users" target="_blank" rel="noopener">dummyjson.com/users</a>, atau pilih salah satu di bawah.</p>
+      <div id="accounts" class="accounts" aria-label="Akun uji"></div>
+    </section>
+  </main>
+  <script src="dist/store.js" defer></script>
+  <script src="dist/queue.js" defer></script>
+  <script src="dist/auth.js" defer></script>
+  <script src="dist/ui.js" defer></script>
+  <script src="dist/login.js" defer></script>
+</body>
+</html>
