@@ -105,5 +105,81 @@ var Queue;
         return out;
     }
     Queue.counts = counts;
+    Queue.waiting = (typeId) => Queue.tickets().filter((t) => t.status === "waiting" && (!typeId || t.typeId === typeId));
+    Queue.current = (typeId) => Queue.tickets().find((t) => t.typeId === typeId && t.status === "called") ?? null;
+    Queue.nextTicket = (typeId) => [...Queue.waiting(typeId)].sort((a, b) => {
+        const ra = Queue.PRIORITIES[a.priority].rank;
+        const rb = Queue.PRIORITIES[b.priority].rank;
+        return ra !== rb ? ra - rb : a.seq - b.seq;
+    })[0] ?? null;
+    function announce(t) {
+        Store.write(Store.KEYS.lastCall, { label: t.label, typeName: Queue.typeById(t.typeId)?.name ?? t.code, at: Date.now() });
+    }
+    function callTicket(id) {
+        const list = Queue.tickets();
+        const t = list.find((x) => x.id === id);
+        if (!t)
+            return fail("Tiket tidak ditemukan.");
+        if (t.status !== "waiting")
+            return fail("Tiket tidak sedang menunggu.");
+        t.status = "called";
+        t.calledAt = Date.now();
+        saveTickets(list);
+        announce(t);
+        return ok(t);
+    }
+    Queue.callTicket = callTicket;
+    function callNext(typeId) {
+        const cur = Queue.current(typeId);
+        if (cur)
+            closeTicket(cur.id, "done");
+        const next = Queue.nextTicket(typeId);
+        if (!next)
+            return ok(null);
+        const r = callTicket(next.id);
+        return r.ok ? ok(r.value) : r;
+    }
+    Queue.callNext = callNext;
+    function finish(typeId) {
+        const cur = Queue.current(typeId);
+        if (!cur)
+            return fail("Tidak ada tiket yang sedang dipanggil.");
+        const row = closeTicket(cur.id, "done");
+        return row ? ok(row) : fail("Tiket tidak ditemukan.");
+    }
+    Queue.finish = finish;
+    function skip(typeId) {
+        const cur = Queue.current(typeId);
+        if (!cur)
+            return fail("Tidak ada tiket yang sedang dipanggil.");
+        const list = Queue.tickets();
+        const row = list.find((x) => x.id === cur.id);
+        if (!row)
+            return fail("Tiket tidak ditemukan.");
+        row.status = "skipped";
+        row.skips += 1;
+        row.closedAt = Date.now();
+        saveTickets(list);
+        return ok(row);
+    }
+    Queue.skip = skip;
+    function recall(typeId) {
+        const cur = Queue.current(typeId);
+        if (!cur)
+            return fail("Tidak ada tiket yang sedang dipanggil.");
+        announce(cur);
+        return ok(cur);
+    }
+    Queue.recall = recall;
+    function closeTicket(id, status) {
+        const list = Queue.tickets();
+        const t = list.find((x) => x.id === id);
+        if (!t)
+            return null;
+        t.status = status;
+        t.closedAt = Date.now();
+        saveTickets(list);
+        return t;
+    }
     ensureSeed();
 })(Queue || (Queue = {}));

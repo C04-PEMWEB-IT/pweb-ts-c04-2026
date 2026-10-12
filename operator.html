@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Operator · Antrian Rumah Sakit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div>
+        <h1>Panel Operator</h1>
+        <p class="sub">Panggil, lewati, atau selesaikan antrian sesuai urutan prioritas.</p>
+      </div>
+      <div class="topbar-actions">
+        <a class="btn btn-ghost btn-sm" href="index.html">Dashboard</a>
+        <div id="userBox" class="userbox"></div>
+      </div>
+    </header>
+
+    <main id="operatorGrid" class="operator-grid" aria-label="Panel penganggilan antrian"></main>
+  </div>
+  <script src="dist/store.js" defer></script>
+  <script src="dist/queue.js" defer></script>
+  <script src="dist/auth.js" defer></script>
+  <script src="dist/ui.js" defer></script>
+  <script src="dist/operator.js" defer></script>
+</body>
+</html>

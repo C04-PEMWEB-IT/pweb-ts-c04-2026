@@ -1,5 +1,4 @@
-// Logika data antrian. Orang 1 mengisi bagian jenis antrian, tiket manual, dan reset.
-// TODO Orang 2: tambahkan fungsi waiting, current, callTicket, callNext, finish, skip, recall di namespace ini.
+// Logika data antrian: jenis antrian, tiket, reset, dan pemanggilan oleh operator.
 namespace Queue {
   export const PRIORITIES: Record<Priority, { label: string; rank: number }> = {
     vip: { label: "VIP", rank: 0 },
@@ -104,6 +103,90 @@ namespace Queue {
     const out: Record<TicketStatus, number> = { waiting: 0, called: 0, done: 0, skipped: 0 };
     for (const t of tickets()) if (!typeId || t.typeId === typeId) out[t.status] += 1;
     return out;
+  }
+
+  // ---------- operator: pemanggilan antrian ----------
+  // Urutan panggil: prioritas (VIP > Disabilitas > Lansia > Normal), lalu FIFO berdasarkan seq.
+  export const waiting = (typeId?: string): Ticket[] =>
+    tickets().filter((t) => t.status === "waiting" && (!typeId || t.typeId === typeId));
+
+  export const current = (typeId: string): Ticket | null =>
+    tickets().find((t) => t.typeId === typeId && t.status === "called") ?? null;
+
+  export const nextTicket = (typeId?: string): Ticket | null =>
+    [...waiting(typeId)].sort((a, b) => {
+      const ra = PRIORITIES[a.priority].rank;
+      const rb = PRIORITIES[b.priority].rank;
+      return ra !== rb ? ra - rb : a.seq - b.seq;
+    })[0] ?? null;
+
+  // Catat tiket yang baru dipanggil untuk ditampilkan di layar antrian.
+  function announce(t: Ticket): void {
+    Store.write(Store.KEYS.lastCall, { label: t.label, typeName: typeById(t.typeId)?.name ?? t.code, at: Date.now() } as CallEvent);
+  }
+
+  // Ubah tiket "waiting" menjadi "called" (sedang dipanggil).
+  export function callTicket(id: string): Result<Ticket> {
+    const list = tickets();
+    const t = list.find((x) => x.id === id);
+    if (!t) return fail("Tiket tidak ditemukan.");
+    if (t.status !== "waiting") return fail("Tiket tidak sedang menunggu.");
+    t.status = "called";
+    t.calledAt = Date.now();
+    saveTickets(list);
+    announce(t);
+    return ok(t);
+  }
+
+  // Selesaikan tiket aktif lalu panggil antrian berikutnya (tombol "Panggil Berikutnya").
+  export function callNext(typeId: string): Result<Ticket | null> {
+    const cur = current(typeId);
+    if (cur) closeTicket(cur.id, "done");
+    const next = nextTicket(typeId);
+    if (!next) return ok(null);
+    const r = callTicket(next.id);
+    return r.ok ? ok(r.value) : r;
+  }
+
+  // Tutup tiket aktif tanpa memanggil antrian baru (tombol "Selesai").
+  export function finish(typeId: string): Result<Ticket> {
+    const cur = current(typeId);
+    if (!cur) return fail("Tidak ada tiket yang sedang dipanggil.");
+    const row = closeTicket(cur.id, "done");
+    return row ? ok(row) : fail("Tiket tidak ditemukan.");
+  }
+
+  // Tandai tiket yang tidak hadir sebagai "Dilewati" (tombol "Lewati").
+  export function skip(typeId: string): Result<Ticket> {
+    const cur = current(typeId);
+    if (!cur) return fail("Tidak ada tiket yang sedang dipanggil.");
+    const list = tickets();
+    const row = list.find((x) => x.id === cur.id);
+    if (!row) return fail("Tiket tidak ditemukan.");
+    row.status = "skipped";
+    row.skips += 1;
+    row.closedAt = Date.now();
+    saveTickets(list);
+    return ok(row);
+  }
+
+  // Panggil ulang tiket aktif (perbarui pengumuman tanpa mengubah status).
+  export function recall(typeId: string): Result<Ticket> {
+    const cur = current(typeId);
+    if (!cur) return fail("Tidak ada tiket yang sedang dipanggil.");
+    announce(cur);
+    return ok(cur);
+  }
+
+  // Penutup bersama: ubah status tiket aktif dan simpan.
+  function closeTicket(id: string, status: TicketStatus): Ticket | null {
+    const list = tickets();
+    const t = list.find((x) => x.id === id);
+    if (!t) return null;
+    t.status = status;
+    t.closedAt = Date.now();
+    saveTickets(list);
+    return t;
   }
 
   ensureSeed();
