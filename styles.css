@@ -1,6 +1,18 @@
+/* ============================================================
+   styles.css — TEMA IDENTITAS VISUAL ITS (Brand Guideline 2026)
+   ------------------------------------------------------------
+   Re-tema oleh ORANG 3 dengan izin kelompok:
+   - Semua selector & layout halaman Orang 1 & 2 dipertahankan
+     persis; yang berubah hanya palet warna (hijau → biru ITS,
+     amber → kuning logo #FDBB16).
+   - Palet resmi: Biru Cover #243F81, Biru Lambang #127BBE,
+     Biru Muda #75BDE0, Kuning Logo #FDBB16, Navy #192841.
+   - Aset grafis: logo ITS + maskot SENO (folder assets/).
+   ============================================================ */
 :root{
-  --bg:#EAF1EE; --card:#fff; --line:#D2DFD9; --text:#17302A; --muted:#5A6F67;
-  --pine:#0F4A3F; --pine-deep:#0A2F28; --amber:#F08A00; --amber-ink:#7A4300; --amber-soft:#FFEFD3;
+  --bg:#EFF4F9; --card:#fff; --line:#D3DEEA; --text:#16283F; --muted:#5A6E85;
+  --pine:#127BBE; --pine-deep:#0E6296; --amber:#FDBB16; --amber-ink:#6E5200; --amber-soft:#FFF4D6;
+  --navy:#192841; --cover:#243F81; --biru-muda:#75BDE0;
   --coral:#C23B30; --green:#1E7A55; --r:14px;
   --display:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif;
   --body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -31,9 +43,9 @@ button,input,select{font:inherit;color:inherit}
 .btn-xl{padding:18px 20px;font-size:1.25rem;border-radius:12px;width:100%}
 .btn-primary{background:var(--pine);border-color:var(--pine);color:#fff}
 .btn-primary:hover:not(:disabled){background:var(--pine-deep)}
-.btn-call{background:var(--amber);border-color:var(--amber);color:#2B1700}
-.btn-call:hover:not(:disabled){background:#FFA21F}
-.btn-ghost:hover:not(:disabled){background:#F1F6F4}
+.btn-call{background:var(--amber);border-color:var(--amber);color:#3D2E00}
+.btn-call:hover:not(:disabled){background:#FFCB3D}
+.btn-ghost:hover:not(:disabled){background:#EDF3FA}
 .btn-danger{color:var(--coral);border-color:#E9B9B4}
 .btn-danger:hover:not(:disabled){background:#FCEFED}
 .btn-danger-solid{background:var(--coral);border-color:var(--coral);color:#fff}
@@ -52,21 +64,22 @@ input[aria-invalid=true]{border-color:var(--coral)}
 .form-error-info{background:var(--amber-soft);color:var(--amber-ink)}
 
 /* chips */
-.chip{display:inline-block;padding:2px 9px;border-radius:999px;border:1px solid var(--line);background:#F4F8F6;font-size:.75rem;font-weight:700;color:var(--muted);vertical-align:middle}
-.chip-waiting{color:#35544B}
-.chip-called{background:var(--amber-soft);border-color:#F6CE93;color:var(--amber-ink)}
+.chip{display:inline-block;padding:2px 9px;border-radius:999px;border:1px solid var(--line);background:#F2F6FB;font-size:.75rem;font-weight:700;color:var(--muted);vertical-align:middle}
+.chip-waiting{color:#33567E}
+.chip-called{background:var(--amber-soft);border-color:#F6D98C;color:var(--amber-ink)}
 .chip-done{background:#E4F4EC;border-color:#BFE3D0;color:#16603F}
 .chip-skipped,.chip-off{background:#FCEFED;border-color:#EFC6C1;color:#8E2A22}
-.chip-prio-vip{background:#F3E8FF;border-color:#DCC5F7;color:#5B2A8C}
-.chip-prio-disabilitas{background:#E4F0FB;border-color:#BCD6EE;color:#1D4F7D}
-.chip-prio-lansia{background:#FFF6D6;border-color:#F0DE9A;color:#6F5600}
-.chip-role{background:var(--pine);border-color:var(--pine);color:#fff}
+/* prioritas memakai palet sekunder ITS (warna ciri fakultas) */
+.chip-prio-vip{background:#FFF6D6;border-color:#EFD98A;color:#6E5200}
+.chip-prio-disabilitas{background:#E2F5F3;border-color:#A8DDd8;color:#0B6B62}
+.chip-prio-lansia{background:#FDEDE6;border-color:#F5C4AC;color:#93441E}
+.chip-role{background:var(--cover);border-color:var(--cover);color:#fff}
 .chip-pick{cursor:pointer;background:#fff;font-size:.8rem;padding:4px 10px}
 .chip-pick:hover{background:var(--amber-soft)}
 
 /* admin */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:18px}
-.stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 16px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 16px;border-top:3px solid var(--cover)}
 .stat strong{display:block;font:800 1.9rem var(--display);font-variant-numeric:tabular-nums}
 .stat span{color:var(--muted);font-size:.85rem}
 .list{list-style:none;margin:16px 0 0;padding:0}
@@ -77,8 +90,8 @@ input[aria-invalid=true]{border-color:var(--coral)}
 .list-head h3{font-size:1rem}
 .list-head label{font-size:.85rem;color:var(--muted);display:flex;gap:6px;align-items:center}
 .group{margin-top:14px}
-.group h4{font-size:.95rem;color:var(--pine);margin-bottom:6px}
-.ticket-row{display:flex;gap:8px;align-items:center;padding:7px 10px;border-radius:10px;background:#F4F8F6;margin-bottom:4px;flex-wrap:wrap}
+.group h4{font-size:.95rem;color:var(--cover);margin-bottom:6px}
+.ticket-row{display:flex;gap:8px;align-items:center;padding:7px 10px;border-radius:10px;background:#F2F6FB;margin-bottom:4px;flex-wrap:wrap}
 .ticket-label{font:800 1rem var(--display);min-width:56px;font-variant-numeric:tabular-nums}
 .ticket-called{background:var(--amber-soft)}
 .ticket-done{opacity:.6}
@@ -90,13 +103,13 @@ input[aria-invalid=true]{border-color:var(--coral)}
 .call-now .muted{color:var(--amber-ink)}
 .call-number{display:block;font:800 2.6rem/1.1 var(--display);font-variant-numeric:tabular-nums;color:var(--amber-ink);margin:2px 0 6px}
 .call-number.is-empty{color:var(--muted)}
-.call-next{margin-top:10px;padding:12px 16px;border-radius:var(--r);background:#F4F8F6;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.call-next{margin-top:10px;padding:12px 16px;border-radius:var(--r);background:#F2F6FB;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .call-next-value{display:flex;gap:8px;align-items:center;font:800 1.25rem var(--display);font-variant-numeric:tabular-nums}
 .operator-actions{margin-top:16px;justify-content:flex-start}
 
 /* login */
 .login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}
-.login-card{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px}
+.login-card{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px;border-top:5px solid var(--cover)}
 .login-card h1{font-size:2rem;margin-bottom:6px}
 .login-card .field{margin-top:16px}
 .login-card .btn-primary{width:100%;margin-top:20px;padding:12px}
@@ -105,14 +118,101 @@ input[aria-invalid=true]{border-color:var(--coral)}
 
 /* dialog */
 dialog{border:none;border-radius:18px;padding:0;max-width:92vw}
-dialog::backdrop{background:rgba(10,47,40,.55)}
+dialog::backdrop{background:rgba(25,40,65,.55)}
 .modal form{padding:24px;min-width:min(340px,80vw)}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
 /* toast */
 #toasts{position:fixed;right:16px;bottom:16px;display:grid;gap:8px;z-index:50}
-.toast{background:var(--pine-deep);color:#fff;padding:10px 16px;border-radius:10px;font-size:.92rem;box-shadow:0 6px 20px rgba(0,0,0,.2);animation:in .2s ease-out}
-.toast-error{background:var(--coral)} .toast-ok{background:var(--green)}
+.toast{background:var(--navy);color:#fff;padding:10px 16px;border-radius:10px;font-size:.92rem;box-shadow:0 6px 20px rgba(0,0,0,.2);animation:in .2s ease-out}
+.toast-error{background:var(--coral)} .toast-ok{background:var(--pine)}
 @keyframes in{from{opacity:0;transform:translateY(8px)}}
 
 @media (max-width:860px){.two-col{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============================================================
+   ORANG 3 — gaya untuk layar.html (monitor) dan
+   ambil-antrian.html (kiosk). Tema ITS + maskot SENO.
+   ============================================================ */
+
+/* ---------- layar.html: mode gelap biru ITS ---------- */
+.screen-body{background:linear-gradient(160deg,#192841 0%,#243F81 100%);color:#EAF1EE;min-height:100vh}
+.screen-shell{max-width:1400px;margin:0 auto;padding:28px 24px 48px}
+.screen-sub{margin:4px 0 0;color:#75BDE0;font-size:.95rem}
+.screen-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.screen-top h1{font-size:1.9rem;color:#fff}
+.screen-brand{display:flex;gap:18px;align-items:center}
+.screen-logo{height:64px;width:auto}
+.screen-brand-text{border-left:2px solid rgba(117,189,224,.4);padding-left:18px}
+.screen-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.screen-clock{font:800 2rem/1 var(--display);font-variant-numeric:tabular-nums;color:#FDBB16;margin-right:6px}
+.screen-body .btn{background:transparent;color:#EAF1EE;border-color:rgba(255,255,255,.3)}
+.screen-body .btn:hover:not(:disabled){background:rgba(255,255,255,.1)}
+.screen-body .btn.is-on{background:#FDBB16;border-color:#FDBB16;color:#192841}
+
+/* ---------- layar.html: banner + SENO ---------- */
+.screen-banner{position:relative;display:flex;align-items:center;gap:18px;min-height:96px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(117,189,224,.25);
+  border-radius:var(--r);padding:14px 20px;margin-bottom:22px;overflow:hidden}
+.banner-bubble{position:absolute;right:150px;bottom:-18px;height:88px;width:auto;opacity:.9;pointer-events:none}
+.banner-seno{position:absolute;right:10px;bottom:0;height:110px;width:auto;pointer-events:none}
+.banner-content{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.screen-banner .label{color:#75BDE0;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.screen-banner strong{font:800 1.7rem var(--display);color:#FDBB16;font-variant-numeric:tabular-nums}
+.screen-banner .at{margin-left:auto;padding-right:270px;color:#75BDE0;font-size:.9rem;font-variant-numeric:tabular-nums}
+
+/* ---------- layar.html: kartu per jenis antrian ---------- */
+.screen-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.screen-empty{color:#BFD8CF}
+.screen-card{position:relative;background:#243F81;border:1px solid rgba(117,189,224,.25);
+  border-radius:18px;padding:24px 20px;text-align:center;overflow:hidden}
+.screen-card.is-calling{border-color:#FDBB16;animation:screen-pulse 1.6s ease-in-out infinite}
+.screen-type{font-size:1.05rem;color:#75BDE0;margin-bottom:12px}
+.screen-type span{color:#4E8DBB;font-weight:600}
+.screen-number{font:800 3.4rem/1 var(--display);font-variant-numeric:tabular-nums;color:#fff;margin:0}
+.screen-number.is-empty{color:#4E6E8F}
+.screen-meta{margin:10px 0 0;min-height:24px}
+.screen-waiting{margin:12px 0 0;color:#75BDE0;font-size:.95rem}
+.screen-waiting strong{color:#fff;font-size:1.25rem;font-variant-numeric:tabular-nums}
+/* wajah SENO muncul kecil di kartu yang sedang memanggil (ORANG 3, di-render layar.ts) */
+.card-seno{position:absolute;top:10px;right:10px;height:44px;width:auto;opacity:.95}
+@keyframes screen-pulse{
+  0%,100%{box-shadow:0 0 0 3px #FDBB16}
+  50%{box-shadow:0 0 0 8px rgba(253,187,22,.28)}
+}
+
+/* ---------- ambil-antrian.html: kiosk ala ITS + SENO ---------- */
+.kiosk-head{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.kiosk-head img{height:44px;width:auto}
+.kiosk-head h1{font-size:1.6rem}
+/* sapaan: SENO full body + balon kata navy */
+.kiosk-greet{position:relative;display:flex;align-items:center;gap:18px;background:#EAF4FB;
+  border:1px solid #CBDEF0;border-radius:var(--r);padding:16px 22px 16px 16px;margin-bottom:20px}
+.greet-seno{height:110px;width:auto;flex:none}
+.kiosk-greet p{margin:0;font-weight:600;color:#243F81;font-size:1.05rem}
+.kiosk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.kiosk-type{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:16px;
+  border:2px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;text-align:left;
+  transition:border-color .15s,background .15s}
+.kiosk-type:hover{border-color:#127BBE}
+.kiosk-type.is-selected{border-color:#127BBE;background:#EAF4FB;box-shadow:0 0 0 2px #127BBE}
+.kiosk-code{font:800 1.4rem/1 var(--display);color:#243F81}
+.kiosk-name{font-weight:700}
+.kiosk-wait{font-size:.82rem;color:var(--muted)}
+.kiosk-step{margin-top:22px;font-size:1.05rem}
+.kiosk-prio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.kiosk-prio{padding:14px;border:2px solid var(--line);border-radius:12px;background:#fff;font-weight:700;cursor:pointer;
+  transition:border-color .15s,background .15s}
+.kiosk-prio:hover{border-color:#127BBE}
+.kiosk-prio.is-selected{border-color:#127BBE;background:#EAF4FB;box-shadow:0 0 0 2px #127BBE}
+.kiosk-take{width:100%;margin-top:24px;padding:18px;font-size:1.2rem;border-radius:12px;
+  background:#127BBE;border-color:#127BBE}
+.kiosk-take:hover:not(:disabled){background:#0E6296}
+
+/* ---------- ambil-antrian.html: struk tiket + SENO kagum ---------- */
+.ticket-stub{text-align:center;padding:6px 4px}
+.stub-seno{height:84px;width:auto;margin:0 auto 4px;display:block}
+.stub-label{font:800 3.4rem/1 var(--display);font-variant-numeric:tabular-nums;color:#243F81;margin:6px 0 2px}
+.stub-type{font-weight:700;margin:0}
+.stub-meta{color:var(--muted);font-size:.9rem;margin:10px 0 0}
+.stub-meta strong{font-variant-numeric:tabular-nums;color:var(--text)}

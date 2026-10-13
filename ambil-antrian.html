@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <!-- ORANG 3: ambil-antrian.html — Halaman Ambil Antrian (kiosk, publik tanpa login).
+       Pengunjung memilih jenis layanan + prioritas, tiket diformat Kode-Nomor3Digit (A-001).
+       Jenis antrian baru dari Dashboard Admin muncul otomatis via Store.watch (tanpa reload). -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ambil Antrian · Antrian Rumah Sakit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <!-- ORANG 3: logo ITS modern versi biru (latar terang) + judul -->
+      <div class="kiosk-head">
+        <img src="assets/lambang-wordmark-its-biru.png" alt="Institut Teknologi Sepuluh Nopember">
+        <div>
+          <h1>Ambil Antrian</h1>
+          <p class="sub">Pilih jenis layanan dan tingkat prioritas, lalu tekan Ambil Nomor. Tidak perlu login.</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <!-- ORANG 3: tautan ke layar antrian agar mudah diuji berdampingan -->
+        <a class="btn btn-ghost btn-sm" href="layar.html">Layar Antrian</a>
+      </div>
+    </header>
+
+    <!-- ORANG 3: maskot SENO full body + balon kata navy sebagai sapaan pengunjung -->
+    <section class="kiosk-greet" role="note">
+      <img src="assets/seno-full.png" alt="Maskot SENO ITS" class="greet-seno">
+      <p>Selamat datang! Silakan pilih layanan yang Anda tuju — nomor Anda akan dipanggil sesuai urutan prioritas.</p>
+    </section>
+
+    <section class="card">
+      <!-- ORANG 3: langkah 1 — pilihan jenis antrian aktif (dirender dist/kiosk.js) -->
+      <h2>1 · Pilih jenis layanan</h2>
+      <div id="kioskTypes" class="kiosk-grid" aria-label="Jenis antrian aktif"></div>
+
+      <!-- ORANG 3: langkah 2 — pilihan prioritas -->
+      <h2 class="kiosk-step">2 · Pilih prioritas</h2>
+      <div id="kioskPriorities" class="kiosk-prio-grid" aria-label="Tingkat prioritas"></div>
+
+      <!-- ORANG 3: tombol utama penerbitan tiket -->
+      <button id="takeBtn" class="btn btn-primary kiosk-take" type="button">Ambil Nomor</button>
+    </section>
+  </div>
+
+  <!-- ORANG 3: dialog tiket (muncul setelah berhasil ambil nomor) -->
+  <dialog id="ticketDialog" class="modal">
+    <form method="dialog">
+      <div class="ticket-stub">
+        <!-- ORANG 3: SENO ekspresi kagum (mata bintang) menyambut nomor baru -->
+        <img src="assets/seno-kagum.png" alt="" aria-hidden="true" class="stub-seno">
+        <p class="muted small">Nomor antrian Anda</p>
+        <p id="dlgLabel" class="stub-label">A-001</p>
+        <p id="dlgTypeName" class="stub-type">—</p>
+        <p id="dlgPriority"></p>
+        <p class="stub-meta">Antrean ke-<strong id="dlgPosition">1</strong> · dicetak <span id="dlgTime">—</span></p>
+      </div>
+      <div class="modal-actions">
+        <button value="ok" class="btn btn-primary">Selesai</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ORANG 3: urutan script konsisten dengan halaman lain; tanpa auth.js karena halaman publik.
+       dist/kiosk.js adalah hasil kompilasi src/kiosk.ts (halaman Ambil Antrian). -->
+  <script src="dist/store.js" defer></script>
+  <script src="dist/queue.js" defer></script>
+  <script src="dist/ui.js" defer></script>
+  <script src="dist/kiosk.js" defer></script>
+</body>
+</html>
