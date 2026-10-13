@@ -14,7 +14,7 @@
     const showPass = UI.$("#showPass");
     const accounts = UI.$("#accounts");
     const reasons = {
-        forbidden: "Akun Anda tidak memiliki akses ke Dashboard Admin. Masuk dengan akun admin atau moderator.",
+        forbidden: "Akun Anda tidak memiliki akses ke halaman tersebut. Masuk dengan akun admin atau moderator.",
         login: "Silakan masuk dulu untuk membuka halaman tersebut.",
     };
     const reason = params.get("reason");

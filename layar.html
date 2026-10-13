@@ -1,60 +1,50 @@
 <!doctype html>
 <html lang="id">
-    <head>
-        <meta charset="utf-8" />
-        <!-- ORANG 3: layar.html — Halaman Layar Antrian (publik, tanpa login).
-       Desain memakai identitas visual resmi ITS (ITS Brand Guideline 2026):
-       palet warna ITS + logo ITS + balon kata dari kit maskot SENO (folder assets/).
-       Polling otomatis via Store.watch, kartu per jenis antrian aktif,
-       Fullscreen API, dan bonus audio panggilan (chime + Web Speech API). -->
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Layar Antrian · Antrian Rumah Sakit</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hanken+Grotesk:wght@400;600;700&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body class="screen-body">
-        <div class="screen-shell">
-            <header class="screen-top">
-                <!-- ORANG 3: logo ITS resmi (varian putih, wordmark modern) -->
-                <div class="screen-brand">
-                    <img
-                        src="assets/logo-its-putih.png"
-                        alt="Institut Teknologi Sepuluh Nopember"
-                        class="screen-logo"
-                    />
-                    <div class="screen-brand-text">
-                        <h1>Antrian Rumah Sakit</h1>
-                        <p class="screen-sub">Silakan menuju loket sesuai nomor yang dipanggil.</p>
-                    </div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Layar Antrian · Antrian Rumah Sakit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hanken+Grotesk:wght@400;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="screen-body">
+    <div class="screen-shell">
+        <header class="screen-top">
+            <div class="screen-brand">
+                <img src="assets/logo-its-putih.png" alt="Institut Teknologi Sepuluh Nopember" class="screen-logo" />
+                <div class="screen-brand-text">
+                    <h1>Antrian Rumah Sakit</h1>
+                    <p class="screen-sub">Silakan menuju loket sesuai nomor yang dipanggil.</p>
                 </div>
-                <div class="screen-controls">
-                    <span id="screenClock" class="screen-clock" aria-label="Jam saat ini">—</span>
-                    <!-- ORANG 3: bonus — tombol suara & layar penuh -->
-                    <button id="soundBtn" class="btn btn-sm" type="button">🔇 Suara Mati</button>
-                    <button id="fullscreenBtn" class="btn btn-sm" type="button">⛶ Layar Penuh</button>
-                </div>
-            </header>
+            </div>
+            <div class="screen-controls">
+                <span id="screenClock" class="screen-clock" aria-label="Jam saat ini">—</span>
+                <button id="soundBtn" class="btn btn-sm" type="button">🔇 Suara Mati</button>
+                <button id="fullscreenBtn" class="btn btn-sm" type="button">⛶ Layar Penuh</button>
+                <div id="userBox" class="userbox"></div>
+            </div>
+        </header>
 
-            <!-- ORANG 3: banner panggilan terakhir — balon kata kuning + maskot SENO berdiri -->
-            <section id="screenBanner" class="screen-banner" aria-live="polite">
-                <img src="assets/seno-balon-kuning.png" alt="" aria-hidden="true" class="banner-bubble" />
-                <img src="assets/seno-full.png" alt="" aria-hidden="true" class="banner-seno" />
-                <div class="banner-content"></div>
-            </section>
+        <section id="screenBanner" class="screen-banner" aria-live="polite">
+            <img src="assets/seno-balon-kuning.png" alt="" aria-hidden="true" class="banner-bubble" />
+            <img src="assets/seno-full.png" alt="" aria-hidden="true" class="banner-seno" />
+            <div class="banner-content"></div>
+        </section>
 
-            <!-- ORANG 3: kartu per jenis antrian aktif, dirender oleh dist/layar.js -->
-            <main id="screenGrid" class="screen-grid" aria-label="Nomor antrian yang sedang dipanggil"></main>
-        </div>
+        <main id="screenGrid" class="screen-grid" aria-label="Nomor antrian yang sedang dipanggil"></main>
+    </div>
 
-        <!-- ORANG 3: urutan script konsisten dengan halaman lain; tanpa auth.js karena halaman publik -->
-        <script src="dist/store.js" defer></script>
-        <script src="dist/queue.js" defer></script>
-        <script src="dist/ui.js" defer></script>
-        <script src="dist/layar.js" defer></script>
-    </body>
+    <script src="dist/store.js" defer></script>
+    <script src="dist/queue.js" defer></script>
+    <script src="dist/auth.js" defer></script>
+    <script src="dist/ui.js" defer></script>
+    <script src="dist/layar.js" defer></script>
+</body>
+
 </html>

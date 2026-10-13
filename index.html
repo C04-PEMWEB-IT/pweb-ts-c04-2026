@@ -1,13 +1,18 @@
 <!doctype html>
 <html lang="id">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard Admin · Antrian Rumah Sakit</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hanken+Grotesk:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="shell">
     <header class="topbar">
@@ -16,8 +21,7 @@
         <p class="sub">Reset setiap hari agar penomoran antrian mulai dari awal.</p>
       </div>
       <div class="topbar-actions">
-        <!-- TODO Orang 2 dan 3: tambahkan tautan ke operator.html, layar.html, ambil-antrian.html -->
-        <!-- ORANG 3: tautan ke halaman milik Orang 3 (layar.html & ambil-antrian.html) -->
+        <a class="btn btn-ghost btn-sm" href="operator.html">Panel Operator</a>
         <a class="btn btn-ghost btn-sm" href="layar.html">Layar Antrian</a>
         <a class="btn btn-ghost btn-sm" href="ambil-antrian.html">Ambil Antrian</a>
         <button id="resetBtn" class="btn btn-danger btn-sm" type="button">Reset Antrian</button>
@@ -32,7 +36,8 @@
         <h2>Jenis antrian</h2>
         <form id="typeForm" class="inline-form" novalidate>
           <label>Kode<input id="typeCode" type="text" maxlength="1" placeholder="C" autocomplete="off"></label>
-          <label class="grow">Nama<input id="typeName" type="text" maxlength="30" placeholder="Contoh: Farmasi" autocomplete="off"></label>
+          <label class="grow">Nama<input id="typeName" type="text" maxlength="30" placeholder="Contoh: Farmasi"
+              autocomplete="off"></label>
           <button class="btn btn-primary" type="submit">Tambah</button>
         </form>
         <p id="typeError" class="form-error" role="alert" hidden></p>
@@ -45,13 +50,17 @@
           <label class="grow">Jenis antrian<select id="typeSelect"></select></label>
           <label>Prioritas
             <select id="prioSelect">
-              <option value="normal">Normal</option><option value="lansia">Lansia</option>
-              <option value="disabilitas">Disabilitas</option><option value="vip">VIP</option>
+              <option value="normal">Normal</option>
+              <option value="lansia">Lansia</option>
+              <option value="disabilitas">Disabilitas</option>
+              <option value="vip">VIP</option>
             </select>
           </label>
           <button class="btn btn-primary" type="submit">Terbitkan</button>
         </form>
-        <div class="list-head"><h3>Daftar tiket</h3></div>
+        <div class="list-head">
+          <h3>Daftar tiket</h3>
+        </div>
         <div id="ticketList"></div>
       </section>
     </main>
@@ -62,4 +71,5 @@
   <script src="dist/ui.js" defer></script>
   <script src="dist/admin.js" defer></script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 (() => {
-  const session = Auth.guard();
+  // Revisi role access: Panel Operator hanya untuk admin/moderator.
+  const session = Auth.guard({ staffOnly: true });
   if (!session) return;
   UI.mountUserBox(session, UI.$("#userBox"));
 

@@ -1,6 +1,6 @@
 // ============================================================
 // ORANG 3 — kiosk.ts (halaman ambil-antrian.html)
-// Self-service pengunjung (publik, tanpa login):
+// Revisi: halaman kini PROTECTED — wajib login (role user/admin/moderator).
 //  - Pilih jenis antrian aktif + tingkat prioritas.
 //  - Terbitkan tiket lewat Queue.issue(..., "kiosk") dengan
 //    format nomor Kode-Nomor3Digit (contoh: A-001).
@@ -10,6 +10,11 @@
 // ============================================================
 
 (() => {
+  // Auth guard: redirect ke login.html bila belum login.
+  const session = Auth.guard();
+  if (!session) return;
+  UI.mountUserBox(session, UI.$("#userBox"));
+
   const grid = UI.$("#kioskTypes");
   const prioGrid = UI.$("#kioskPriorities");
   const takeBtn = UI.$<HTMLButtonElement>("#takeBtn");

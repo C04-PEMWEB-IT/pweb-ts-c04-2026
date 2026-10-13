@@ -1,5 +1,9 @@
 "use strict";
 (() => {
+    const session = Auth.guard();
+    if (!session)
+        return;
+    UI.mountUserBox(session, UI.$("#userBox"));
     const grid = UI.$("#kioskTypes");
     const prioGrid = UI.$("#kioskPriorities");
     const takeBtn = UI.$("#takeBtn");

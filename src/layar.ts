@@ -1,6 +1,7 @@
 // ============================================================
 // ORANG 3 — layar.ts (halaman layar.html)
-// Layar Antrian publik untuk monitor utama:
+// Revisi: halaman kini PROTECTED — wajib login (role user/admin/moderator).
+// Layar Antrian untuk monitor utama:
 //  - Polling data tiap ±2,5 detik memakai Store.watch (event
 //    `storage` + interval) tanpa reload halaman.
 //  - Kartu untuk setiap jenis antrian aktif: nomor yang sedang
@@ -11,6 +12,11 @@
 // ============================================================
 
 (() => {
+  // Auth guard: redirect ke login.html bila belum login.
+  const session = Auth.guard();
+  if (!session) return;
+  UI.mountUserBox(session, UI.$("#userBox"));
+
   const grid = UI.$("#screenGrid");
   const banner = UI.$("#screenBanner");
   const clockEl = UI.$("#screenClock");

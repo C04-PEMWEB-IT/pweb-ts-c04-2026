@@ -11,7 +11,9 @@ namespace Auth {
   }
 
   export const isStaff = (role: Role): boolean => role === "admin" || role === "moderator";
-  export const homeFor = (role: Role): string => (isStaff(role) ? "index.html" : "operator.html");
+  // Role access (revisi): admin/moderator diarahkan ke Dashboard Admin,
+  // sedangkan role user diarahkan ke halaman Ambil Antrian.
+  export const homeFor = (role: Role): string => (isStaff(role) ? "index.html" : "ambil-antrian.html");
 
   export function session(): AuthSession | null {
     const s = Store.read<Partial<AuthSession> | null>(Store.KEYS.session, null);

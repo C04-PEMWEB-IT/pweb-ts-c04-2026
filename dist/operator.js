@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-    const session = Auth.guard();
+    const session = Auth.guard({ staffOnly: true });
     if (!session)
         return;
     UI.mountUserBox(session, UI.$("#userBox"));

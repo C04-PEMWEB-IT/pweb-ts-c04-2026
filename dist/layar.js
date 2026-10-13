@@ -1,5 +1,9 @@
 "use strict";
 (() => {
+    const session = Auth.guard();
+    if (!session)
+        return;
+    UI.mountUserBox(session, UI.$("#userBox"));
     const grid = UI.$("#screenGrid");
     const banner = UI.$("#screenBanner");
     const clockEl = UI.$("#screenClock");

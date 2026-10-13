@@ -4,7 +4,7 @@ var Auth;
     const API = "https://dummyjson.com";
     const ROLES = ["admin", "moderator", "user"];
     Auth.isStaff = (role) => role === "admin" || role === "moderator";
-    Auth.homeFor = (role) => (Auth.isStaff(role) ? "index.html" : "operator.html");
+    Auth.homeFor = (role) => (Auth.isStaff(role) ? "index.html" : "ambil-antrian.html");
     function session() {
         const s = Store.read(Store.KEYS.session, null);
         if (!s || !s.token || !s.role || !s.firstName || !ROLES.includes(s.role))
